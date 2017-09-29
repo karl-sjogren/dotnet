@@ -18,13 +18,14 @@ namespace StackExchange.Profiling
         /// </summary>
         public override MiniProfiler CurrentProfiler
         {
-            get => HttpContext.Current?.Items[CacheKey] as MiniProfiler;
+            get => HttpContext.Current?.Items[CacheKey] as MiniProfiler ?? base.CurrentProfiler;
             protected set
             {
                 if (HttpContext.Current != null)
                 {
                     HttpContext.Current.Items[CacheKey] = value;
                 }
+                base.CurrentProfiler = value;
             }
         }
 
